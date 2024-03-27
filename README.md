@@ -1,2 +1,2 @@
-# atalaia-server
-Code responsible for the server layer of the Atalaia Project.
+# atalaia_server
+Code responsible for the Atalaia Project server layer.

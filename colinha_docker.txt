@@ -1,0 +1,74 @@
+__Fluxo de Trabalho__
+
+
+
+-> Login
+docker login
+
+
+
+-> Imagens
+
+# Ver imagens
+docker images
+
+# Ver todas imagens
+docker images ls -a
+
+# Construir imagens
+docker build -t danielsum/atalaia-server:1.0.0 .
+
+# Copiar uma imagem (obs.: mantém o mesmo ID)
+docker tag dsum/atalaia-server:1.0.0 novousuario/nova-imagem:1.0.0
+
+# Ver camadas de uma imagem
+docker history nome_da_imagemm
+
+# Excluir imagem
+docker rmi ID_da_imagem_ou_nome_com_versão
+
+# Excluir todas as imagens
+docker rmi $(docker image ls -aq) --force
+
+# Excluir todas as imagens não utilizadas (sem container associado)
+docker image prune
+
+
+
+-> Containers
+
+# Rodar Containers
+docker run -d -p 8080:80 danielsum/atalaia-server:1.0.0
+docker run -d -P danielsum/atalaia-server:1.0.0 (comportas aleatórias)
+
+# Rodar container do Docker Hub (nuvem)
+docker run -it ubuntu bash
+*obs: -it já ativa o modo de exec do container
+
+# Associar um diretório com um diretório do container
+docker run -it -v /home/dsum/src-docker-container:/src ubuntu bash
+docker run -it --mount type=bind,source=/home/dsum/src-docker-container:/src ubuntu bash (mais recomendado)
+
+# Ver Containers ativos
+docker ps
+
+# Ver todos os Containers
+docker ps -a
+
+# Ver o tamanho dos Containers
+docker ps -s
+
+# Parar Todos os Containers
+docker stop $(docker container ls -q)
+docker stop -t $(docker container ls -q)  (rápido, mas não seguro)
+docker stop id_do_container (para 1 só)
+docker stop -t id_do_container (para 1 só, rápido, mas não seguro)
+
+# Excluir todos os container
+docker container rm $(docker container ls -aq)
+
+# Mandando para o Docker Hub
+docker push danielsum/atalaia-server:1.0.0
+
+# Entrar no container
+docker exec -it f09da143ec48 bash
